@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import mlflow.sklearn
 from sklearn.base import BaseEstimator, TransformerMixin 
-from sklearn.pipeline import Pipeline
 import pickle
 
 class FeatureEngineer(BaseEstimator, TransformerMixin):
