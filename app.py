@@ -130,11 +130,11 @@ elif choice == 'Dementia Prediction':
         # Make prediction directly with the loaded model (includes preprocessing)
         prediction = loaded_model.predict(input_data)[0]
         
-    # Display prediction with custom styling
-    if prediction == 0:
-        st.markdown('<p style="font-size:24px; font-weight:bold;">No risk of dementia</p>', unsafe_allow_html=True)
-    else:
-        st.markdown('<p style="font-size:24px; font-weight:bold;">Risk of dementia</p>', unsafe_allow_html=True)
+        # Display prediction with custom styling
+        if prediction == 0:
+            st.markdown('<p style="font-size:24px; font-weight:bold;">No risk of dementia</p>', unsafe_allow_html=True)
+        else:
+            st.markdown('<p style="font-size:24px; font-weight:bold;">Risk of dementia</p>', unsafe_allow_html=True)
 
 
         
