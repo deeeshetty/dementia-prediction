@@ -151,9 +151,17 @@ with tab2:
         
         # Display prediction with custom styling
         if prediction == 0:
-            st.markdown('<p style="font-size:24px; font-weight:bold;">No risk of dementia</p>', unsafe_allow_html=True)
+                st.markdown("""
+        <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; font-size: 24px;">
+            🎉 No Risk of Dementia
+        </div>
+        """, unsafe_allow_html=True)
         else:
-            st.markdown('<p style="font-size:24px; font-weight:bold;">Risk of dementia</p>', unsafe_allow_html=True)
+                st.markdown("""
+        <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; font-size: 24px;">
+            ⚠️ Risk of Dementia
+        </div>
+        """, unsafe_allow_html=True)
 
 
         
