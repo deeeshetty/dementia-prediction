@@ -1,5 +1,5 @@
 h3 {
-    color: #171616;
+    color: #000000;
     font-size:1.393rem;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 .team-member {
-    background-color: #ffffff35;
+    background-color: #00000035;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);

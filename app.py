@@ -71,15 +71,15 @@ except Exception as e:
     st.error(f"Error loading model: {e}")
     st.stop()
 
-# Set the MLflow tracking URI
-# mlflow.set_tracking_uri("https://7fd7-34-23-134-225.ngrok-free.app")  # Replace with your ngrok URL
-# model_path = "https://7fd7-34-23-134-225.ngrok-free.app/api/2.0/preview/mlflow/artifacts/runs:/bf138f85611d424b91dfd7c39e566829/artifacts/model"
 
-# # Load the best model
-# logged_model = 'runs:/bf138f85611d424b91dfd7c39e566829/model'
-
-# # Load model as a PyFuncModel.
-# loaded_model = mlflow.pyfunc.load_model(model_path)
+# Apply custom CSS for padding and font size
+st.markdown("""
+    <style>
+    .stTabs [role="tab"] {
+        padding-top: 20px;  /* Add padding on top */
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # Feature names
 feature_names = ['AlcoholLevel', 'HeartRate', 'BloodOxygenLevel', 'BodyTemperature',
@@ -99,14 +99,28 @@ st.markdown('<div class="top-section"></div>', unsafe_allow_html=True)
 # Define menu options
 menu = ['Introduction', 'Dementia Prediction']
 
+st.markdown("""
+    <style>
+    .stTabs [data-baseweb="tab"] {
+        font-size: 28px;  /* Increase the font size */
+        padding-top: 20px;  /* Add padding on top */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Display menu
 tab1,tab2 = st.tabs(menu)
 
 # Handle menu selections
 with tab1:
-    st.write('Welcome to the Dementia Prediction App!')
-    st.write('This project focuses on predicting dementia onset using various health and lifestyle factors, targeting healthcare professionals who are assessing their patients risk for dementia. Early prediction can lead to early intervention, significantly slowing the disease’s progression and improving the patient’s quality of life. Furthermore, it can inform public health strategies, helping healthcare systems and policymakers to allocate resources effectively, design targeted prevention programs, and monitor disease trends over time.')
-
+    st.markdown(
+        """
+        <div style="color:#000000;">
+        <p><strong>Welcome to the Dementia Prediction App!</strong></p>
+        <p>This project focuses on predicting dementia onset by using various health and lifestyle factors. We are targeting healthcare professionals who are assessing their patients' risk for dementia. Early prediction can lead to early intervention, significantly slowing the disease’s progression and improving the patient’s quality of life. Furthermore, it can inform public health strategies, helping healthcare systems and policymakers to allocate resources effectively, design targeted prevention programs, and monitor disease trends over time.</p>
+        </div>
+        """, unsafe_allow_html=True
+    )
 with tab2:
     st.write('Enter patient details:')
     
