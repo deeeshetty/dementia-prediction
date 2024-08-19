@@ -4,6 +4,13 @@ import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin 
 import pickle
 
+
+def replace_values(arr):
+    unique_values = np.unique(arr)
+    replacement_dict = {'Unknown': 0, 'Sedentary': 1, 'Mild Activity': 2, 'Moderate Activity': 3}
+    replacement_dict_full = {val: replacement_dict.get(val, val) for val in unique_values}
+    return np.vectorize(replacement_dict_full.get)(arr)
+
 class FeatureEngineer(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
@@ -55,7 +62,7 @@ def replace_ordinal_values(arr):
 
 
 # Load the trained model from a .pkl file
-model_path = 'best_model_log_reg.pkl'
+model_path = 'log_reg_best_model_new.pkl'
 
 try:
     with open(model_path, 'rb') as f:
@@ -93,14 +100,14 @@ st.markdown('<div class="top-section"></div>', unsafe_allow_html=True)
 menu = ['Introduction', 'Dementia Prediction']
 
 # Display menu
-choice = st.sidebar.selectbox('Menu', menu)
+tab1,tab2 = st.tabs(menu)
 
 # Handle menu selections
-if choice == 'Introduction':
+with tab1:
     st.write('Welcome to the Dementia Prediction App!')
     st.write('This project focuses on predicting dementia onset using various health and lifestyle factors, targeting healthcare professionals who are assessing their patients risk for dementia. Early prediction can lead to early intervention, significantly slowing the disease’s progression and improving the patient’s quality of life. Furthermore, it can inform public health strategies, helping healthcare systems and policymakers to allocate resources effectively, design targeted prevention programs, and monitor disease trends over time.')
 
-elif choice == 'Dementia Prediction':
+with tab2:
     st.write('Enter patient details:')
     
     # Input form for dementia prediction
