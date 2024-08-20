@@ -87,6 +87,27 @@ feature_names = ['AlcoholLevel', 'HeartRate', 'BloodOxygenLevel', 'BodyTemperatu
                  'APOE_ε4', 'Physical_Activity', 'Depression_Status',
                  'Cognitive_Test_Scores', 'Chronic_Health_Conditions']
 
+# Help descriptions for each feature
+feature_help = {
+    'AlcoholLevel': ('Alcohol Level', 'The amount of alcohol consumed. This can affect cognitive functions and overall health.'),
+    'HeartRate': ('Heart Rate', 'The number of heartbeats per minute. An indicator of cardiovascular health.'),
+    'BloodOxygenLevel': ('Blood Oxygen Level', 'The percentage of oxygen in the blood. Critical for assessing respiratory health.'),
+    'BodyTemperature': ('Body Temperature', 'The body’s temperature in degrees celsius. A key indicator of health.'),
+    'Weight': ('Weight', 'The weight of the patient in kilograms. Used for assessing overall health.'),
+    'MRI_Delay': ('MRI Delay', 'Time delay in days between the MRI scan and assessment. Important for accuracy of MRI findings.'),
+    'Age': ('Age', 'The age of the patient. Age is a significant risk factor for dementia.'),
+    'Family_History': ('Family History', 'Whether there is a history of dementia in the patient’s family.'),
+    'Smoking_Status': ('Smoking Status', 'Indicates if the patient is a smoker, non-smoker, or former smoker.'),
+    'APOE_ε4': ('APOE ε4', 'Genetic marker associated with increased risk of dementia.'),
+    'Physical_Activity': ('Physical Activity', 'Level of physical activity. Regular exercise can reduce dementia risk.'),
+    'Depression_Status': ('Depression Status', 'Whether the patient has a history of depression, which can affect dementia risk.'),
+    'Cognitive_Test_Scores': ('Cognitive Test Scores', 'Scores from cognitive tests that assess mental function.'),
+    'Chronic_Health_Conditions': ('Chronic Health Conditions', 'Other chronic health conditions that could impact dementia risk.')
+}
+
+
+
+
 CSS = open("assets/css/styles.css", 'r').read()
 st.markdown(f"<style>{CSS}</style>", unsafe_allow_html=True)
 
@@ -117,7 +138,7 @@ with tab1:
         """
         <div style="color:#000000;">
         <p><strong>Welcome to the Dementia Prediction App!</strong></p>
-        <p>This project focuses on predicting dementia onset by using various health and lifestyle factors. We are targeting healthcare professionals who are assessing their patients' risk for dementia. Early prediction can lead to early intervention, significantly slowing the disease’s progression and improving the patient’s quality of life. Furthermore, it can inform public health strategies, helping healthcare systems and policymakers to allocate resources effectively, design targeted prevention programs, and monitor disease trends over time.</p>
+        <p>This application is designed specifically for healthcare professionals to assess their patients' risk of developing dementia. By inputting various health and lifestyle factors, the app provides an early prediction of dementia onset. Early detection is crucial as it allows for timely interventions, potentially slowing the disease’s progression and significantly improving the quality of life for patients. Additionally, this tool supports public health efforts by informing strategies for resource allocation, designing targeted prevention programs, and monitoring disease trends over time</p>
         </div>
         """, unsafe_allow_html=True
     )
@@ -131,14 +152,18 @@ with tab2:
     df = pd.read_csv("dementia_patients_health_data.csv")
 
     for feature in feature_names:
+        # Transform feature name for display
+        transformed_name, help_text = feature_help[feature]
         if feature in ['Family_History', 'Smoking_Status', 'APOE_ε4', 'Depression_Status', 'Chronic_Health_Conditions', 'Physical_Activity']:
             unique_values = df[feature].unique()
             unique_values = [str(value) for value in unique_values]
-            input_value = form.selectbox(f'{feature}:', unique_values)
+            input_value = form.selectbox(f'{transformed_name}:', unique_values, help=help_text)
         else:
             # Handle numerical inputs
-            input_value = form.number_input(f'{feature}:', value=0.0)
+            input_value = form.number_input(f'{transformed_name}:', value=0.0, help=help_text)
         inputs.append(input_value)
+    
+
 
     submit_button = form.form_submit_button('Predict')
 
